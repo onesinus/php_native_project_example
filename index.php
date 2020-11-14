@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project ABC</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href='css/table.css' rel='stylesheet' />
 </head>
 <body>
     <script src='js/jquery-3.5.1.js'></script>

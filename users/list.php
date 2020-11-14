@@ -1,12 +1,28 @@
-<a href='index.php?page=users&action=form' class="btn btn-primary mb-2 float-right">Add New User</a>
-<table class="table table-bordered table-hover table-responsive">
+<a 
+    href='index.php?page=users&action=form' 
+    class="btn btn-primary mb-2"
+>
+    Add New User
+</a>
+<table 
+    id='table'
+    class="table"
+    style='width: 100%'
+>
   <thead>
     <tr>
-      <th>#</th>
-      <th>Id</th>
+      <th 
+        style='width: 5%'
+      >
+        #
+    </th>
       <th>Username</th>
       <th>Role</th>
-      <th>Actions</th>
+      <th
+          style='width: 35%'  
+      >
+        Actions
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -19,11 +35,8 @@
                     $i++;
       ?>
                 <tr>
-                    <th scope="row">
+                    <td scope="row">
                         <?php echo $i ?>
-                    </th>
-                    <td>
-                        <?php echo $row['id']; ?>
                     </td>
                     <td>
                         <?php echo $row['username'] ?>
@@ -34,6 +47,9 @@
                     <td>
                         <a href='index.php?page=users&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
+                        </a>
+                        <a href='index.php?page=users&action=change_password&id=<?php echo $row["id"]; ?>' class="btn btn-secondary">
+                            Change Password
                         </a>
                         <a href='index.php?page=users&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
                             Edit
@@ -53,4 +69,8 @@
         ?>
   </tbody>
 </table>
+
+<script src="js/jquery.dataTables.min.js"></script>
+<script src='js/dataTables.bootstrap5.min.js'></script>
+<script src="js/users/list.js"></script>
 <script src="js/users/delete.js"></script>

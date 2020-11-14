@@ -4,7 +4,7 @@
 	if (isset($_POST)) {
 		$id = isset($_POST['id']) ? $_POST['id'] : 0;
 		$username   = $_POST['username'];
-		$password   = $_POST['password'];
+		$password   = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$role       = $_POST['role'];
 
 		if($id) { // handle edit data

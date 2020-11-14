@@ -25,14 +25,9 @@
         name='username'
         value="<?php echo $user['username'] ?>"
         placeholder='Input your username'
-    >
-    <small 
-        id="usernameHelp" 
-        class="form-text text-muted"
-    >
-        Username must be only alphanumeric.
-    </small>
+    > 
   </div>
+  <?php if(!$id): ?>
   <div class="form-group mt-2">
     <label for="inputPassword">Password</label>
     <input 
@@ -44,6 +39,7 @@
         placeholder='Input your password'
     >
   </div>
+    <?php endif; ?>
   <div class="form-group">
     <label for="selectRole">Select Role</label>
     <select class="form-control" id="selectRole" name='role'>
