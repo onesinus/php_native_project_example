@@ -1,8 +1,9 @@
-<a href='index.php?page=users&action=add' class="btn btn-primary mb-2 float-right">Add New User</a>
+<a href='index.php?page=users&action=form' class="btn btn-primary mb-2 float-right">Add New User</a>
 <table class="table table-bordered table-hover table-responsive">
   <thead>
     <tr>
       <th>#</th>
+      <th>Id</th>
       <th>Username</th>
       <th>Role</th>
       <th>Actions</th>
@@ -13,13 +14,17 @@
             $query = "SELECT * FROM users";
             $datas = $conn->query($query);
             if ($datas->num_rows > 0):
-                $i = 1;
+                $i = 0;
                 while ($row = $datas->fetch_assoc()):		      				
+                    $i++;
       ?>
                 <tr>
                     <th scope="row">
-                        <?php echo $row['id'] ?>
+                        <?php echo $i ?>
                     </th>
+                    <td>
+                        <?php echo $row['id']; ?>
+                    </td>
                     <td>
                         <?php echo $row['username'] ?>
                     </td>
@@ -27,13 +32,17 @@
                         <?php echo $row['role'] ?>
                     </td>
                     <td>
-                        <button class="btn btn-success">
+                        <a href='index.php?page=users&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
-                        </button>
-                        <button class="btn btn-warning">
+                        </a>
+                        <a href='index.php?page=users&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
                             Edit
-                        </button>
-                        <button class="btn btn-danger">
+                        </a>
+                        <button 
+                            data-id='<?php echo $row["id"]; ?>' 
+                            data-username='<?php echo $row["username"]; ?>' 
+                            class="btnDelete btn btn-danger"
+                        >
                             Delete
                         </button>
                     </td>
@@ -44,3 +53,4 @@
         ?>
   </tbody>
 </table>
+<script src="js/users/delete.js"></script>

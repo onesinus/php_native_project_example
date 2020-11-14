@@ -8,6 +8,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <script src='js/jquery-3.5.1.js'></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+
     <?php
       require "layouts/header.php";
       require "configurations/connect.php";
@@ -23,7 +27,5 @@
     <?php
       require "layouts/footer.php";
     ?>
-    
-    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
