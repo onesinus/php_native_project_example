@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,7 @@
       require "configurations/connect.php";
       
       $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-      $actions = isset($_GET['action']) ? $_GET['action'] : 'list';
+      $actions = isset($_GET['action']) ? $_GET['action'] : 'index';
     ?>
     <main class="container">
       <?php

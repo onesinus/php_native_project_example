@@ -12,6 +12,9 @@
             $encrypted_password = password_hash($new_password, PASSWORD_DEFAULT);
             $query = "UPDATE users SET password = '$encrypted_password' WHERE id = '$id' AND password='$old_password';";
             if ($conn->query($query) === TRUE) {
+                session_start();
+                $_SESSION['message'] = 'User password has been changed';
+    
                 Header('Location: ../../index.php?page=users');		
             }else {
                 echo "Error: " . $conn->error;
