@@ -1,8 +1,8 @@
 <a 
-    href='index.php?page=users&action=form' 
+    href='index.php?page=cash-advances&action=form' 
     class="btn btn-primary mb-2"
 >
-    Add New User
+    Add New Cash Advance
 </a>
 
 <?php
@@ -30,8 +30,8 @@
       >
         #
     </th>
-      <th>Username</th>
-      <th>Role</th>
+      <th>Number</th>
+      <th>Description</th>
       <th
           style='width: 35%'  
       >
@@ -41,7 +41,7 @@
   </thead>
   <tbody>
       <?php
-            $query = "SELECT * FROM users";
+            $query = "SELECT * FROM cash_advances";
             $datas = $conn->query($query);
             if ($datas->num_rows > 0):
                 $i = 0;
@@ -53,24 +53,21 @@
                         <?php echo $i ?>
                     </td>
                     <td>
-                        <?php echo $row['username'] ?>
+                        <?php echo $row['doc_num'] ?>
                     </td>
                     <td>
-                        <?php echo $row['role'] ?>
+                        <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <a href='index.php?page=users&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
+                        <a href='index.php?page=cash-advances&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
                         </a>
-                        <a href='index.php?page=users&action=change_password&id=<?php echo $row["id"]; ?>' class="btn btn-secondary">
-                            Change Password
-                        </a>
-                        <a href='index.php?page=users&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
+                        <a href='index.php?page=cash-advances&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
                             Edit
                         </a>
                         <button 
                             data-id='<?php echo $row["id"]; ?>' 
-                            data-username='<?php echo $row["username"]; ?>' 
+                            data-Cash Advancename='<?php echo $row["Cash Advancename"]; ?>' 
                             class="btnDelete btn btn-danger"
                         >
                             Delete
@@ -87,4 +84,4 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script src='js/dataTables.bootstrap5.min.js'></script>
 <script src="js/common/list.js"></script>
-<script src="js/users/delete.js"></script>
+<script src="js/cash-advances/delete.js"></script>

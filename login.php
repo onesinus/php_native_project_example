@@ -1,6 +1,9 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 ?>
+<title>Login Project ABC</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <?php
     require "layouts/header.php";
@@ -15,6 +18,7 @@
                 class="form-control" 
                 name='username'
                 autocomplete="off"
+                placeholder="Masukkan Username"
             > 
         </div>
         <div class="form-group mt-2">
@@ -23,6 +27,7 @@
                 type="password" 
                 class="form-control" 
                 name='password'
+                placeholder="Masukkan Password"
             >
         </div>
         <button type="submit" class="btn btn-primary mt-2">Login</button>
