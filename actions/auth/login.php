@@ -14,6 +14,7 @@
             $_SESSION['user_logged_in'] = $user;
             Header('Location: ../../index.php');
         }else {
+            $_SESSION['message'] = 'Invalid username or password';
             Header('Location: ../../login.php');
         }
     }

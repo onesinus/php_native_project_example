@@ -9,10 +9,20 @@
     require "layouts/header.php";
     require "configurations/connect.php";
 ?>
-<main class="container text-center col-md-4">
+<main class="container text-center col-md-6" style='margin-top: 10vh;'>
+    <h1 class='display-4'>Login Form</h1>
+    <?php
+        if(isset($_SESSION['message'])):
+    ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['message']; ?>
+        </div>
+    <?php     
+        unset($_SESSION['message']);
+        endif; 
+    ?>
     <form method='POST' action='actions/auth/login.php'>
         <div class="form-group">
-            <h4>Username</h4>
             <input 
                 type="text" 
                 class="form-control" 
@@ -22,7 +32,6 @@
             > 
         </div>
         <div class="form-group mt-2">
-            <h4>Password</h4>
             <input 
                 type="password" 
                 class="form-control" 
@@ -30,7 +39,7 @@
                 placeholder="Masukkan Password"
             >
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Login</button>
+        <button type="submit" class="btn btn-primary col-md-12">Login</button>
     </form>
 </main>
 <?php

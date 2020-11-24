@@ -13,6 +13,12 @@
         </td>
     </tr>
     <tr>
+        <th>NIK Karyawan</th>
+        <td>
+            <?php echo $user['nik'] ?>
+        </td>
+    </tr>    
+    <tr>
         <th>Role</th>
         <td>
             <?php echo $user['role'] ?>

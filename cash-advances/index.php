@@ -79,6 +79,11 @@
             endif;
         ?>
   </tbody>
+  <tfoot>
+    <tr>
+        <th colspan='5'></th>
+    </tr>
+  </tfoot>
 </table>
 
 <script src="js/jquery.dataTables.min.js"></script>

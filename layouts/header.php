@@ -5,8 +5,23 @@
   
   require "configurations/connect.php";
 ?>
-<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <p class="h5 my-0 mr-md-auto fw-normal">Project Skuy</p>
+<header class="
+  d-flex flex-column 
+  flex-md-row 
+  align-items-center 
+  p-2
+  px-md-4 
+  mb-3
+  border-bottom 
+  shadow-sm"
+>
+  <a
+     href='index.php' 
+     class="btn my-0 mr-md-auto"
+     style='font-size: 15pt; font-weight: bold;'
+  >
+    Project Skuy
+  </a>
   <?php
     $user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
     if($user):

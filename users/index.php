@@ -1,10 +1,3 @@
-<a 
-    href='index.php?page=users&action=form' 
-    class="btn btn-primary mb-2"
->
-    Add New User
-</a>
-
 <?php
     if(isset($_SESSION['message'])):
 ?>
@@ -16,12 +9,21 @@
     </div>
 <?php     
     unset($_SESSION['message']);
+    else:
+?>
+    
+<?php
     endif; 
 ?>
-<table 
-    id='table'
+<a 
+    href='index.php?page=users&action=form' 
+    class="btn btn-primary"
+    style='float: left;'
+>
+    Add New User
+</a>
+<table
     class="table"
-    style='width: 100%'
 >
   <thead>
     <tr>
@@ -30,8 +32,9 @@
       >
         #
     </th>
-      <th>Username</th>
-      <th>Role</th>
+      <th>Nama</th>
+      <th>NIK Karyawan</th>
+      <th>Jabatan</th>
       <th
           style='width: 35%'  
       >
@@ -54,6 +57,9 @@
                     </td>
                     <td>
                         <?php echo $row['username'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['nik'] ?>
                     </td>
                     <td>
                         <?php echo $row['role'] ?>
@@ -82,6 +88,11 @@
             endif;
         ?>
   </tbody>
+  <tfoot>
+    <tr>
+        <th colspan='5'></th>
+    </tr>
+  </tfoot>
 </table>
 
 <script src="js/jquery.dataTables.min.js"></script>
