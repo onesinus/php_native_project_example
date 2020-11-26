@@ -8,6 +8,7 @@
 		$username   = $_POST['username'];
 		$password   = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$nik 		= $_POST['nik'];
+		$jabatan 	= $_POST['jabatan'];
 		$role       = $_POST['role'];
 
 		if($id) { // handle edit data
@@ -19,6 +20,7 @@
 						username = '$username', 
 						-- password = '$password', 
 						nik = '$nik', 
+						jabatan = '$jabatan', 
 						role = '$role' 
 					WHERE 
 						id = '$id';";
@@ -29,11 +31,13 @@
 				username, 
 				password, 
 				nik,
+				jabatan,
 				role
 			) VALUES(
 				'$username', 
 				'$password', 
-				'$nik', 
+				'$nik',
+				'$jabatan', 
 				'$role'
 			);";
 		}

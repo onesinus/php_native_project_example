@@ -35,6 +35,7 @@
       <th>Nama</th>
       <th>NIK Karyawan</th>
       <th>Jabatan</th>
+      <th>Hak Akses</th>
       <th
           style='width: 35%'  
       >
@@ -60,6 +61,9 @@
                     </td>
                     <td>
                         <?php echo $row['nik'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['jabatan'] ?>
                     </td>
                     <td>
                         <?php echo $row['role'] ?>

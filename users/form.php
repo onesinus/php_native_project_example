@@ -4,6 +4,7 @@
     'username' => '',
     'password' => '',
     'nik'      => '',
+    'jabatan' => '',
     'role'     => ''
   );
 
@@ -48,7 +49,7 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputNik">NIK</label>
+      <label for="inputNik">NIK Karyawan</label>
       <input 
           type="text" 
           class="form-control" 
@@ -61,28 +62,49 @@
       /> 
     </div>
     <div class="form-group col-md-6">
-      <label for="selectRole">Select Role</label>
-      <select class="form-control" id="selectRole" name='role'>
-        <option 
-          value='Administrator'
-          <?php if($user['role'] == 'Administrator') { echo 'selected="selected"'; }  ?>
-        >
-          Administrator
-        </option>
-        <option
-          value='Admin Web'
-          <?php if($user['role'] == 'Admin Web') { echo 'selected="selected"'; }  ?>
-        >
-          Admin Web
-        </option>
-        <option 
-          value='Kang Mie Ayam'
-          <?php if($user['role'] == 'Kang Mie Ayam') { echo 'selected="selected"'; }  ?>
-        >
-          Kang Mie Ayam
-        </option>
-      </select>
+      <label for="inputJabatan">Jabatan</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="inputJabatan" 
+          aria-describedby="jabatanHelp"
+          name='jabatan'
+          value="<?php echo $user['jabatan'] ?>"
+          placeholder='Input your Position'
+          autocomplete="off"
+      /> 
     </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="selectRole">Hak Akses</label>
+        <select class="form-control" id="selectRole" name='role'>
+          <option 
+            value='Admin'
+            <?php if($user['role'] == 'Admin') { echo 'selected="selected"'; }  ?>
+          >
+            Admin
+          </option>
+          <option
+            value='Finance'
+            <?php if($user['role'] == 'Finance') { echo 'selected="selected"'; }  ?>
+          >
+            Finance
+          </option>
+          <option 
+            value='Management'
+            <?php if($user['role'] == 'Management') { echo 'selected="selected"'; }  ?>
+          >
+            Management
+          </option>
+          <option 
+            value='IT'
+            <?php if($user['role'] == 'IT') { echo 'selected="selected"'; }  ?>
+          >
+            IT
+          </option>
+        </select>
+      </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">

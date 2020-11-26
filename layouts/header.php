@@ -4,6 +4,14 @@
   }
   
   require "configurations/connect.php";
+
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+  $user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
+  $username = $user['username'];
+  $user_id = $user['id'];
+
+  $activeMenuClass = "alert alert-dark";
 ?>
 <header class="
   d-flex flex-column 
@@ -27,11 +35,25 @@
     if($user):
   ?>
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="index.php?page=users">Users</a>
-    <a class="p-2 text-dark" href="index.php?page=cash-advances">Cash Advance</a>
-    <a class="p-2 text-dark" href="index.php?page=page3">Page 3</a>
+    <a class="p-2 text-dark <?php if ($page == 'users'){ echo $activeMenuClass; } ?> " href="index.php?page=users">Users</a>
+    <a class="p-2 text-dark <?php if ($page == 'cash-advances'){ echo $activeMenuClass; } ?>" href="index.php?page=cash-advances">Cash Advances</a>
+    <a class="p-2 text-dark <?php if ($page == 'realizations'){ echo $activeMenuClass; } ?>" href="index.php?page=realizations">Realizations</a>
+    <a class="p-2 text-dark <?php if ($page == 'payments'){ echo $activeMenuClass; } ?>" href="index.php?page=payments">Payments</a>
+    <a class="p-2 text-dark <?php if ($page == 'reports'){ echo $activeMenuClass; } ?>" href="index.php?page=reports">Reports</a>
   </nav>
-  <a class="btn btn-outline-primary" href="actions/auth/logout.php">Logout</a>
+  <div class="btn-group">
+    <button type="button" class="btn btn-success">
+      <?php echo $username; ?>
+    </button>
+    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="index.php?page=users&action=detail&id=<?php echo $user_id; ?>">Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="actions/auth/logout.php">Logout</a>
+    </div>
+  </div>  
   <?php
     else:
   ?>
