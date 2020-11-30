@@ -1,10 +1,3 @@
-<a 
-    href='index.php?page=cash-advances&action=form' 
-    class="btn btn-primary mb-2"
->
-    Add New Cash Advance
-</a>
-
 <?php
     if(isset($_SESSION['message'])):
 ?>
@@ -18,10 +11,15 @@
     unset($_SESSION['message']);
     endif; 
 ?>
+<a 
+    href='index.php?page=cash-advances&action=form' 
+    class="btn btn-primary"
+    style='float: left;'
+>
+    Add New Cash Advance
+</a>
 <table 
-    id='table'
     class="table"
-    style='width: 100%'
 >
   <thead>
     <tr>
@@ -32,6 +30,9 @@
     </th>
       <th>Number</th>
       <th>Description</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Created</th>
       <th
           style='width: 35%'  
       >
@@ -59,6 +60,16 @@
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
+                        <?php echo $row['total'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['status'] ?>
+                    </td>
+                    <td>
+                        <?php echo $row['created_date'] ?>
+                    </td>
+
+                    <td>
                         <a href='index.php?page=cash-advances&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
                         </a>
@@ -81,12 +92,12 @@
   </tbody>
   <tfoot>
     <tr>
-        <th colspan='5'></th>
+        <th colspan='7'></th>
     </tr>
   </tfoot>
 </table>
 
-<script src="js/jquery.dataTables.min.js"></script>
-<script src='js/dataTables.bootstrap5.min.js'></script>
-<script src="js/common/list.js"></script>
-<script src="js/cash-advances/delete.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src='assets/js/dataTables.bootstrap5.min.js'></script>
+<script src="assets/js/common/list.js"></script>
+<script src="assets/js/cash-advances/delete.js"></script>

@@ -1,7 +1,8 @@
-table.dataTable thead tr {
+table.dataTable thead tr, .table-green thead tr {
     background-color: #278f28;
     color: white;
 }
+
 
 #main {
     display: none;

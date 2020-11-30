@@ -2,7 +2,9 @@
 	require "../../configurations/connect.php";
 
 	if (isset($_POST)) {
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 
 		$id = isset($_POST['id']) ? $_POST['id'] : 0;
 		$username   = $_POST['username'];

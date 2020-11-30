@@ -99,7 +99,7 @@
   </tfoot>
 </table>
 
-<script src="js/jquery.dataTables.min.js"></script>
-<script src='js/dataTables.bootstrap5.min.js'></script>
-<script src="js/common/list.js"></script>
-<script src="js/users/delete.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src='assets/js/dataTables.bootstrap5.min.js'></script>
+<script src="assets/js/common/list.js"></script>
+<script src="assets/js/users/delete.js"></script>

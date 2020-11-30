@@ -31,8 +31,7 @@
     Project Skuy
   </a>
   <?php
-    $user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
-    if($user):
+   if($user):
   ?>
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark <?php if ($page == 'users'){ echo $activeMenuClass; } ?> " href="index.php?page=users">Users</a>

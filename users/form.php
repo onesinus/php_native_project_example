@@ -1,5 +1,5 @@
 <?php
-  $user = array(
+  $data = array(
     'id'       => '',
     'username' => '',
     'password' => '',
@@ -8,18 +8,20 @@
     'role'     => ''
   );
 
+  $roles = array('Admin', 'Finance', 'Management', 'IT');
+
   $id = isset($_GET['id']) ? $_GET['id'] : 0;
   $title = $id == 0 ? 'Add User' : 'Edit User';
   if($id) {
     $query = "SELECT * FROM users WHERE id = '$id'";
-    $datas = $conn->query($query);    
-    $user = $datas->fetch_assoc();    
+    $execute_query = $conn->query($query);    
+    $data = $execute_query->fetch_assoc();    
   }
 ?>
 <h1 class='text-center display-4'><?php echo $title; ?></h1>
 <hr/>
 <form method='POST' action='actions/users/save_data.php'>
-  <input type='hidden' name='id' value='<?php echo $user["id"]; ?>' />
+  <input type='hidden' name='id' value='<?php echo $data["id"]; ?>' />
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputUsername">Username</label>
@@ -29,7 +31,7 @@
           id="inputUsername" 
           aria-describedby="usernameHelp"
           name='username'
-          value="<?php echo $user['username'] ?>"
+          value="<?php echo $data['username'] ?>"
           placeholder='Input your username'
           autocomplete="off"
       /> 
@@ -41,7 +43,7 @@
           class="form-control" 
           id="inputPassword"
           name='password'
-          value='<?php echo $user['password']; ?>'
+          value='<?php echo $data['password']; ?>'
           placeholder='Input your password'
           <?php echo ($id == True) ? 'disabled': '' ?>
       >
@@ -56,7 +58,7 @@
           id="inputNik" 
           aria-describedby="nikHelp"
           name='nik'
-          value="<?php echo $user['nik'] ?>"
+          value="<?php echo $data['nik'] ?>"
           placeholder='Input your NIK'
           autocomplete="off"
       /> 
@@ -69,7 +71,7 @@
           id="inputJabatan" 
           aria-describedby="jabatanHelp"
           name='jabatan'
-          value="<?php echo $user['jabatan'] ?>"
+          value="<?php echo $data['jabatan'] ?>"
           placeholder='Input your Position'
           autocomplete="off"
       /> 
@@ -79,30 +81,18 @@
     <div class="form-group col-md-6">
         <label for="selectRole">Hak Akses</label>
         <select class="form-control" id="selectRole" name='role'>
-          <option 
-            value='Admin'
-            <?php if($user['role'] == 'Admin') { echo 'selected="selected"'; }  ?>
-          >
-            Admin
-          </option>
-          <option
-            value='Finance'
-            <?php if($user['role'] == 'Finance') { echo 'selected="selected"'; }  ?>
-          >
-            Finance
-          </option>
-          <option 
-            value='Management'
-            <?php if($user['role'] == 'Management') { echo 'selected="selected"'; }  ?>
-          >
-            Management
-          </option>
-          <option 
-            value='IT'
-            <?php if($user['role'] == 'IT') { echo 'selected="selected"'; }  ?>
-          >
-            IT
-          </option>
+          <?php
+            foreach($roles as $role):
+          ?>
+            <option 
+              value='Admin'
+              <?php if($data['role'] == $role) { echo 'selected="selected"'; }  ?>
+            >
+              <?php echo $role; ?>
+            </option>
+          <?php 
+            endforeach;
+          ?>
         </select>
       </div>
   </div>

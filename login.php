@@ -4,7 +4,7 @@
     }
 ?>
 <title>Login Project ABC</title>
-<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
 <?php
     require "layouts/header.php";
     require "configurations/connect.php";

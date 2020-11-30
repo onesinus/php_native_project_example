@@ -5,7 +5,7 @@
     $user = $datas->fetch_assoc();
 ?>
 <a href='index.php?page=users' class="btn btn-primary mb-2 float-right">List User</a>
-<h1 class='text-center display-4'>Detail User</h1>
+<h1 class='text-center'>Detail User</h1>
 <table class='table'>
     <tr>
         <th>Username</th>
