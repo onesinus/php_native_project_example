@@ -42,6 +42,7 @@
   </nav>
   <div class="btn-group">
     <button type="button" class="btn btn-success">
+      <i class="fas fa-user-circle"></i>
       <?php echo $username; ?>
     </button>
     <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

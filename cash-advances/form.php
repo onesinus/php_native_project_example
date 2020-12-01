@@ -24,6 +24,15 @@
     $data = $execute_query->fetch_assoc();    
   }
 ?>
+<style>
+    .table tr th{
+        padding: 0.5%;
+    }
+
+    .table tr td {
+        padding: 0.45%;
+    }
+</style>
 <table class='table'>
     <tr>
         <th>ID Cash Advance</th>
@@ -92,14 +101,18 @@
                 name='evidence'
             />
         </td>
-        <th>Keterangan CA</th>
+        <th>Sudah direalisasi?</th>
         <td>
-            Yes
+            <input 
+                type="checkbox" 
+                name='is_realized'
+            />
         </td>
     </tr>       
 </table>
 <table 
     class="table table-green"
+    style='margin-top: -1%'
 >
   <thead>
     <tr>
@@ -107,6 +120,7 @@
       <th>Qty</th>
       <th>Bugdet Estimation</th>
       <th>Total</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -139,28 +153,58 @@
                 name='total[]'
             />            
         </td>
+        <td>
+            <button class='btn btn-success'><i class="fas fa-check-circle"></i></button>
+            <button class='btn btn-primary'><i class="fas fa-save"></i> Save CA</button>
+        </td>
     </tr>
   </tbody>
-  <tfoot>
-    <tr>
-            <td colspan="2"></td>
-            <td>PPN</td>
-            <td></td>
-    </tr>
-    <tr>
-            <td colspan="2"></td>
-            <td>PPH</td>
-            <td></td>
-    </tr>
-    <tr>
-            <td colspan="2"></td>
-            <td>Jumlah</td>
-            <td>
-                <?php echo $data['total'] ?>        
-            </td>
-    </tr>
-    <tr>
-        <th colspan='7'></th>
-    </tr>
-  </tfoot>
 </table>
+<div style='margin-top: -1%; overflow-y: auto; height: 230px;'>
+    <table class='table table-hover table-bordered'>
+      <tbody style='cursor: pointer;'>
+        <tr>
+            <td>Beli baju gajelas</td>
+            <td class='text-right'>2</td>
+            <td class='text-right'>Rp. 15000</td>
+            <td class='text-right'>Rp. 30000</td>
+        </tr>
+        <tr>
+            <td>Beli baju gajelas</td>
+            <td class='text-right'>2</td>
+            <td class='text-right'>Rp. 15000</td>
+            <td class='text-right'>Rp. 30000</td>
+        </tr>
+
+        <tr>
+            <td>Beli baju gajelas</td>
+            <td class='text-right'>2</td>
+            <td class='text-right'>Rp. 15000</td>
+            <td class='text-right'>Rp. 30000</td>
+        </tr>
+        <tr>
+            <td>Beli baju gajelas</td>
+            <td class='text-right'>2</td>
+            <td class='text-right'>Rp. 15000</td>
+            <td class='text-right'>Rp. 30000</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">PPN</td>
+            <td class='text-right'>Rp. 3000</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-right">PPH</td>
+            <td class='text-right'>Rp. 3000</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-right">Grand Total</td>
+            <td class='text-right'>
+                <?php echo $data['total'] ?>
+            </td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+<script src="assets/js/cash-advances/form.js"></script>

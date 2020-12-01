@@ -14,8 +14,10 @@
       <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
       <link href='assets/css/loading.css' rel='stylesheet' />    
       <link href='assets/css/table.css' rel='stylesheet' />
+      
+      <script src='assets/js/fa.js'></script>
   </head>
-  <body>
+  <body style='overflow: hidden;'>
       <script src='assets/js/jquery-3.5.1.js'></script>
       <script src='assets/js/common/main.js'></script>
       <script src="assets/js/bootstrap.bundle.min.js"></script>

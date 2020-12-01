@@ -7,3 +7,7 @@ table.dataTable thead tr, .table-green thead tr {
 #main {
     display: none;
 }
+
+.table tr td {
+    padding: 0.5%;
+}
