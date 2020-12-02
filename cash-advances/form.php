@@ -129,65 +129,47 @@
             <input 
                 type="text" 
                 class="form-control" 
-                name='description[]'
+                id='description'
             />
         </td>
         <td>
             <input 
                 type="number" 
                 class="form-control" 
-                name='qty[]'
+                id='qty'
+                placeholder="0"
+                min="0"
             />
         </td>
         <td>
             <input 
                 type="number" 
                 class="form-control" 
-                name='amount[]'
+                id='amount'
+                placeholder="0"
+                min="0"
             />
         </td>
         <td>
             <input 
                 type="number" 
                 class="form-control" 
-                name='total[]'
+                id='total'
+                placeholder="0"
+                disabled
             />            
         </td>
         <td>
-            <button class='btn btn-success'><i class="fas fa-check-circle"></i></button>
-            <button class='btn btn-primary'><i class="fas fa-save"></i> Save CA</button>
+            <button class='btn btn-success' id='btnSaveRow'><i class="fas fa-check-circle"></i></button>
+            <button class='btn btn-danger' id='btnDeleteRow'><i class="fas fa-trash"></i></button>
+            <button class='btn btn-primary' id='btnSaveCa'><i class="fas fa-save"></i> Save CA</button>
         </td>
     </tr>
   </tbody>
 </table>
 <div style='margin-top: -1%; overflow-y: auto; height: 230px;'>
     <table class='table table-hover table-bordered'>
-      <tbody style='cursor: pointer;'>
-        <tr>
-            <td>Beli baju gajelas</td>
-            <td class='text-right'>2</td>
-            <td class='text-right'>Rp. 15000</td>
-            <td class='text-right'>Rp. 30000</td>
-        </tr>
-        <tr>
-            <td>Beli baju gajelas</td>
-            <td class='text-right'>2</td>
-            <td class='text-right'>Rp. 15000</td>
-            <td class='text-right'>Rp. 30000</td>
-        </tr>
-
-        <tr>
-            <td>Beli baju gajelas</td>
-            <td class='text-right'>2</td>
-            <td class='text-right'>Rp. 15000</td>
-            <td class='text-right'>Rp. 30000</td>
-        </tr>
-        <tr>
-            <td>Beli baju gajelas</td>
-            <td class='text-right'>2</td>
-            <td class='text-right'>Rp. 15000</td>
-            <td class='text-right'>Rp. 30000</td>
-        </tr>
+      <tbody style='cursor: pointer;' id='caDetail'>
       </tbody>
       <tfoot>
         <tr>

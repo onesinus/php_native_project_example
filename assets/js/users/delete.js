@@ -13,6 +13,6 @@ $(".btnDelete").on('click', function() {
             if (willDelete) {
                 window.location.href = `actions/users/delete_data.php?id=${user_id}`;
             }
-          });
+        });
     }
 });
