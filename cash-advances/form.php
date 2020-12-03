@@ -44,7 +44,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                name='doc_num'
+                id='doc_num'
                 value="<?php echo $data['doc_num'] ?>"
                 placeholder='Input your CA Number'
                 autocomplete="off"
@@ -61,7 +61,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                name='division'
+                id='division'
                 value="<?php echo $data['division'] ?>"
                 placeholder='Input your Division'
                 autocomplete="off"
@@ -74,7 +74,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                name='description'
+                id='project_name'
                 value="<?php echo $data['description'] ?>"
                 placeholder='Input your project name'
                 autocomplete="off"
@@ -85,7 +85,7 @@
             <input 
                 type="text" 
                 class="form-control" 
-                name='pic_name'
+                id='pic_name'
                 value="<?php echo $data['pic_name'] ?>"
                 placeholder='Input your project name'
                 autocomplete="off"
@@ -98,14 +98,14 @@
             <input 
                 type="file" 
                 class="form-control" 
-                name='evidence'
+                id='evidence'
             />
         </td>
         <th>Sudah direalisasi?</th>
         <td>
             <input 
                 type="checkbox" 
-                name='is_realized'
+                id='is_realized'
             />
         </td>
     </tr>       
