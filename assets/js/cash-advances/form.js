@@ -12,9 +12,8 @@ $(document).ready(function() {
         let division = $("#division").val();
         let pic_name = $("#pic_name").val();
         let is_realized = $("#is_realized").is(":checked");
-        let file = $("#evidence").val();
 
-        let data = [project_name, ca_number, division, pic_name, is_realized, file];
+        let data = [project_name, ca_number, division, pic_name, is_realized];
         if(data.includes("")) {
             swal({
                 title: "Please fill all CA Data input",
@@ -24,6 +23,7 @@ $(document).ready(function() {
               });
             return false;
         }
+
         return data;        
     }
 
@@ -59,6 +59,41 @@ $(document).ready(function() {
 
     const getDataDetail = () => {
         return validateDataDetail();
+    }
+
+    const saveData = (datas) => {
+        $.ajax({
+            url: "actions/cash-advances/save_data.php",
+            type: "POST",
+            data: datas,
+            success: function (response) {
+                if (response == "ok") {
+                    window.location.href = 'index.php?page=cash-advances'
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+
+    const uploadFile = (callback) => {
+        let file_data = $('#evidence').prop('files')[0];   
+        let form_data = new FormData();             
+        form_data.append('file', file_data);
+        
+        $.ajax({
+            url: "actions/common/upload_file.php",
+            dataType: 'text',  
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                         
+            type: 'post',
+            success: function(filename){
+                callback(filename);
+            }
+         });        
     }
 
     $('#btnSaveRow').click(function() {
@@ -110,10 +145,13 @@ $(document).ready(function() {
                     buttons: true,
                     dangerMode: true,
                   })
-                  .then((willDelete) => {
-                    if (willDelete) {
-                        console.log(getData());
-                        console.log(getDataDetail());
+                  .then((willSave) => {
+                    if (willSave) {
+                        uploadFile(function(filename){
+                            const values = {data: getData(), detail: getDataDetail()}
+                            values['data'].push(filename)
+                            saveData(values)
+                        })
                     }
                 });
         }
