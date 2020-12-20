@@ -14,6 +14,7 @@
 		$is_realized = $_POST['data'][4] == 'true' ? 1 : 0;
 		$file = isset($_POST['data'][5]) ? $_POST['data'][5] : '';
 		$status = $is_realized == True ? "Closed" : "Open";
+		$total = isset($_POST['data'][6]) ? $_POST['data'][6] : 0;
 
 		$user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
 		$user_id = $user["id"];
@@ -46,7 +47,7 @@
 				'$pic_name', 
 				'$division', 
 				'$is_realized', 
-				0,
+				'$total',
 				'$status',
 				'$user_id'
 			);";

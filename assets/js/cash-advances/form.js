@@ -104,10 +104,10 @@ $(document).ready(function() {
 
         $("#caDetail").append(`
             <tr>
-                <td>${description}</td>
-                <td class='text-right'>Rp. ${qty}</td>
-                <td class='text-right'>Rp. ${amount}</td>
-                <td class='text-right'>Rp. ${total}</td>
+                <td style='width: 25%'>${description}</td>
+                <td style='width: 25%' class='text-right'>Rp. ${qty}</td>
+                <td style='width: 25%' class='text-right'>Rp. ${amount}</td>
+                <td style='width: 25%' class='text-right'>Rp. ${total}</td>
             </tr>
         `);
 

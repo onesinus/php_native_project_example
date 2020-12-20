@@ -9,11 +9,9 @@
     'total' => '',
     'description' => '',
     'pic_name' => '',
-    'division' => ''
-  );
-
-  $detail = array(
-      'total'   => ''
+    'division' => '',
+    'ppn'   => 0,
+    'total'   => 0
   );
 
   $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -174,16 +172,29 @@
       <tfoot>
         <tr>
             <td colspan="3" class="text-right">PPN</td>
-            <td class='text-right'>Rp. 3000</td>
+            <td style='width: 25%'>
+                <input 
+                    type="number" 
+                    class='ppn form-control'
+                    value="<?php echo $data['ppn'] ?>"
+                />
+            </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td colspan="3" class="text-right">PPH</td>
             <td class='text-right'>Rp. 3000</td>
-        </tr>
+        </tr> -->
         <tr>
             <td colspan="3" class="text-right">Grand Total</td>
-            <td class='text-right'>
-                <?php echo $data['total'] ?>
+            <td style='width: 25%' class='text-right'>
+                <input 
+                    type="number" 
+                    class='d-none grand_total'
+                    value="<?php echo $data['total'] ?>"
+                />
+                <span class='grand_total'>
+                    <?php echo 'Rp. ' . $data['total'] ?>
+                </span>            
             </td>
         </tr>
       </tfoot>
