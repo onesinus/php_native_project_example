@@ -111,6 +111,13 @@ $(document).ready(function() {
             </tr>
         `);
 
+        const grand_total = $('#grand_total');
+        const new_total = parseInt(grand_total.val()) + parseInt(total);
+        grand_total.val(new_total);
+
+        const display_grand_total = $("#display_grand_total");
+        display_grand_total.text('Rp. ' + new_total);
+
         clearForm();
     });
 
@@ -135,6 +142,10 @@ $(document).ready(function() {
             $('#total').val(qty * amount);
         }
     });
+
+    // $('#ppn').change(function() {
+
+    // });
 
     $('#btnSaveCa').click(function() {
         if(getData() && getDataDetail()) {

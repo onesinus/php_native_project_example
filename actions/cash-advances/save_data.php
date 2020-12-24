@@ -15,7 +15,7 @@
 		$file = isset($_POST['data'][5]) ? $_POST['data'][5] : '';
 		$status = $is_realized == True ? "Closed" : "Open";
 		$total = isset($_POST['data'][6]) ? $_POST['data'][6] : 0;
-
+		
 		$user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
 		$user_id = $user["id"];
 		
@@ -51,10 +51,43 @@
 				'$status',
 				'$user_id'
 			);";
-		
+
+			$query2 = "
+				INSERT INTO cash_advance_details (
+					cash_advance_id,
+					description,
+					qty,
+					amount,
+					total_amount,
+					created_by
+				) VALUES
+			";
+
+			foreach ($_POST['detail'] as $key => $value) {
+				if(!empty($value[0])) {
+					$description = isset($value[0]) ? $value[0] : '';
+					$qty = isset($value[1]) ? (int)$value[1] : 0;
+					$amount = isset($value[2]) ? (int)$value[2] : 0;
+					$total_amount = isset($value[3]) ? (int)$value[3] : 0;
+
+					$query2 .= "(
+						(SELECT MAX(id) FROM cash_advances),
+						'$description',
+						$qty,
+						$amount,
+						$total_amount,
+						'$user_id'
+					)";		
+
+					if ($key+1 !== count($_POST['detail'])) {
+						$query2 .= ",";
+					}
+				}
+			}
+			// print($query); exit;			
 		}
 
-		if ($conn->query($query) === TRUE) {
+		if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE) {
 			echo "ok";
 		}else {
 			echo "Error: " . $conn->error;

@@ -175,24 +175,22 @@
             <td style='width: 25%'>
                 <input 
                     type="number" 
-                    class='ppn form-control'
+                    id="ppn"
+                    class='form-control'
                     value="<?php echo $data['ppn'] ?>"
                 />
             </td>
         </tr>
-        <!-- <tr>
-            <td colspan="3" class="text-right">PPH</td>
-            <td class='text-right'>Rp. 3000</td>
-        </tr> -->
         <tr>
             <td colspan="3" class="text-right">Grand Total</td>
             <td style='width: 25%' class='text-right'>
                 <input 
                     type="number" 
-                    class='d-none grand_total'
+                    id='grand_total'
+                    class='d-none'
                     value="<?php echo $data['total'] ?>"
                 />
-                <span class='grand_total'>
+                <span id='display_grand_total'>
                     <?php echo 'Rp. ' . $data['total'] ?>
                 </span>            
             </td>
