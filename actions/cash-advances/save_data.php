@@ -12,9 +12,9 @@
 		$division = isset($_POST['data'][2]) ? $_POST['data'][2] : '';
 		$pic_name = isset($_POST['data'][3]) ? $_POST['data'][3] : '';
 		$is_realized = $_POST['data'][4] == 'true' ? 1 : 0;
-		$file = isset($_POST['data'][5]) ? $_POST['data'][5] : '';
+		$total = isset($_POST['data'][5]) ? (int)$_POST['data'][5] : 0;
+		$file = isset($_POST['data'][6]) ? $_POST['data'][6] : '';
 		$status = $is_realized == True ? "Closed" : "Open";
-		$total = isset($_POST['data'][6]) ? $_POST['data'][6] : 0;
 		
 		$user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
 		$user_id = $user["id"];
@@ -38,6 +38,7 @@
 				pic_name,
 				division,
 				is_realized,
+				file,
 				total,
 				status,
 				created_by
@@ -47,7 +48,8 @@
 				'$pic_name', 
 				'$division', 
 				'$is_realized', 
-				'$total',
+				'$file',
+				$total,
 				'$status',
 				'$user_id'
 			);";

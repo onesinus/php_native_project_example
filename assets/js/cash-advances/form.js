@@ -12,8 +12,9 @@ $(document).ready(function() {
         let division = $("#division").val();
         let pic_name = $("#pic_name").val();
         let is_realized = $("#is_realized").is(":checked");
+        let grand_total = $("#grand_total").val()
 
-        let data = [project_name, ca_number, division, pic_name, is_realized];
+        let data = [project_name, ca_number, division, pic_name, is_realized, grand_total];
         if(data.includes("")) {
             swal({
                 title: "Please fill all CA Data input",
@@ -142,10 +143,6 @@ $(document).ready(function() {
             $('#total').val(qty * amount);
         }
     });
-
-    // $('#ppn').change(function() {
-
-    // });
 
     $('#btnSaveCa').click(function() {
         if(getData() && getDataDetail()) {

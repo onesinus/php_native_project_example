@@ -1,6 +1,15 @@
 <?php
     $id = isset($_GET['id']) ? $_GET['id'] : 0;
-    $query = "SELECT * FROM cash_advances WHERE id = '$id'";
+    $query = "
+        SELECT 
+            ca.*,
+            u.nik 
+        FROM cash_advances ca
+        INNER JOIN users u
+        ON ca.created_by = u.id
+        WHERE 
+            ca.id = '$id'
+    ";
     $datas = $conn->query($query);    
     $ca = $datas->fetch_assoc();
 ?>
@@ -20,31 +29,33 @@
     <tr>
         <th>NIK Karyawan</th>
         <td>
-
+            <?php echo $ca['nik'] ?>            
         </td>
         <th>Divisi</th>
         <td>
-            
+            <?php echo $ca['division'] ?>
         </td>
     </tr>    
     <tr>
         <th>Nama Project</th>
         <td>
-            
+            <?php echo $ca['description'] ?>
         </td>
         <th>Nama PIC</th>
         <td>
-            
-        </td>        
+            <?php echo $ca['pic_name'] ?>
+        </td>
     </tr>
     <tr>
         <th>Keterangan CA</th>
         <td>
-            
+            <?php echo $ca['status'] ?>
         </td>
-        <th>Upload Berkas</th>
+        <th>Berkas</th>
         <td>
-            
+            <a target="_blank" href='uploaded_files/<?php echo $ca['file'] ?>'>
+                <?php echo $ca['file'] ?>
+            </a>
         </td>
     </tr>       
 </table>
@@ -91,11 +102,6 @@
     <tr>
             <td colspan="2"></td>
             <td>PPN</td>
-            <td></td>
-    </tr>
-    <tr>
-            <td colspan="2"></td>
-            <td>PPH</td>
             <td></td>
     </tr>
     <tr>
