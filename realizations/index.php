@@ -12,11 +12,11 @@
     endif; 
 ?>
 <a 
-    href='index.php?page=cash-advances&action=form' 
+    href='index.php?page=realizations&action=form' 
     class="btn btn-primary"
     style='float: left;'
 >
-    Add New Cash Advance
+    Add New Realizations
 </a>
 <table 
     class="table"
@@ -42,7 +42,7 @@
   </thead>
   <tbody>
       <?php
-            $query = "SELECT * FROM cash_advances WHERE is_deleted = 0";
+            $query = "SELECT * FROM realizations WHERE is_deleted = 0";
             $datas = $conn->query($query);
             if ($datas->num_rows > 0):
                 $i = 0;
@@ -107,4 +107,4 @@
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src='assets/js/dataTables.bootstrap5.min.js'></script>
 <script src="assets/js/common/list.js"></script>
-<script src="assets/js/cash-advances/delete.js"></script>
+<script src="assets/js/realizations/delete.js"></script>
