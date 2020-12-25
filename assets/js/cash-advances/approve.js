@@ -1,4 +1,4 @@
-$(".btnDelete").on('click', function() {
+$(".btnApprove").on('click', function() {
     const ca_id = $(this).attr('data-id');
     const description = $(this).attr('data-description');
     
@@ -12,7 +12,7 @@ $(".btnDelete").on('click', function() {
           })
           .then((willDelete) => {
             if (willDelete) {
-                window.location.href = `actions/cash-advances/delete_data.php?id=${ca_id}`;
+                window.location.href = `actions/cash-advances/approve_data.php?id=${ca_id}`;
             }
           });
     }

@@ -73,16 +73,23 @@
                         <a href='index.php?page=cash-advances&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
                         </a>
-                        <a href='index.php?page=cash-advances&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
-                            Edit
-                        </a>
-                        <button 
-                            data-id='<?php echo $row["id"]; ?>' 
-                            data-Cash Advancename='<?php echo $row["Cash Advancename"]; ?>' 
-                            class="btnDelete btn btn-danger"
-                        >
-                            Delete
-                        </button>
+
+                        <?php
+                            if($row['status'] == 'Open'):
+                        ?>
+                            <a href='index.php?page=cash-advances&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
+                                Edit
+                            </a>
+                            <button 
+                                data-id='<?php echo $row["id"]; ?>' 
+                                data-description='<?php echo $row["description"]; ?>' 
+                                class="btnDelete btn btn-danger"
+                            >
+                                Delete
+                            </button>
+                        <?php
+                            endif;
+                        ?>
                     </td>
                 </tr>
         <?php

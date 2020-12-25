@@ -13,7 +13,20 @@
     $datas = $conn->query($query);    
     $ca = $datas->fetch_assoc();
 ?>
-<a href='index.php?page=cash-advances' class="btn btn-primary mb-2 float-right">List Cash Advance</a>
+<?php
+    if($ca['status'] == 'Open'):
+?>
+    <button 
+        data-id='<?php echo $ca["id"]; ?>' 
+        data-description='<?php echo $ca["description"]; ?>' 
+        class="btnApprove btn btn-success float-right"
+    >
+    Approve
+    </button>
+<?php
+    endif;
+?>
+<a href='index.php?page=cash-advances' class="btn btn-primary mr-1 float-right">List Cash Advance</a>
 <h1 class='text-center'>Detail Cash Advance</h1>
 <table class='table'>
     <tr>
@@ -116,3 +129,4 @@
     </tr>
   </tfoot>
 </table>
+<script src="assets/js/cash-advances/approve.js"></script>

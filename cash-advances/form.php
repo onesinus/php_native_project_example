@@ -4,12 +4,13 @@
   $lastId = getLastId('cash_advances');
 
   $data = array(
-    'id'    => '',
+    'id'    => $lastId + 1,
     'doc_num' => '',
     'total' => '',
     'description' => '',
     'pic_name' => '',
     'division' => '',
+    'is_realized' => '',
     'ppn'   => 0,
     'total'   => 0
   );
@@ -35,7 +36,7 @@
     <tr>
         <th>ID Cash Advance</th>
         <td>
-            <?php echo $lastId + 1 ?>
+            <?php echo $data['id']; ?>
         </td>
         <th>Number</th>
         <td>
@@ -104,6 +105,11 @@
             <input 
                 type="checkbox" 
                 id='is_realized'
+                <?php 
+                    if ($data['is_realized'] == "1"){ 
+                        echo "checked";
+                    } 
+                ?>
             />
         </td>
     </tr>       
