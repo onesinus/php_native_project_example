@@ -1,22 +1,27 @@
 $(document).ready(function() {
+    const clearCaInfo = () => {
+        $("#pic_name").val("");
+        $("#division").val("");
+        $("#ca_created_date").val("");
+        $("#ca_modified_date").val("");
+        $("#file").attr("href", "").attr("target", "").text("");
+    }
+
     const clearForm = () => {
         $('#description').val("");
         $('#total').val(0);
     }
 
     const validateData = () => {
-        let project_name = $("#project_name").val();
-        let ca_number = $("#doc_num").val();
-        let division = $("#division").val();
-        let pic_name = $("#pic_name").val();
-        let is_realized = $("#is_realized").is(":checked");
-        let grand_total = $("#grand_total").val()
+        let doc_num = $("#doc_num").val();
+        let ca = $("#ca").val();
+        let total = $("#grand_total").val();
 
-        let data = [project_name, ca_number, division, pic_name, is_realized, grand_total];
+        let data = [doc_num, ca, total];
         if(data.includes("")) {
             swal({
-                title: "Please fill all CA Data input",
-                text: `There is empty input field in CA Header`,
+                title: "Please fill all Realization Data input",
+                text: `There is empty input field in Realization Header`,
                 icon: "error",
                 dangerMode: true,
               });
@@ -27,7 +32,7 @@ $(document).ready(function() {
     }
 
     const validateDataDetail = () => {
-        const caDetail = $("#caDetail tr");
+        const caDetail = $("#realizationDetail tr");
         let row = []
         caDetail.each(function() {
             let col = []
@@ -44,11 +49,12 @@ $(document).ready(function() {
         }
 
         swal({
-            title: "Please fill all CA Detail Data input",
-            text: `There is empty input field in CA Detail`,
+            title: "Please fill all Realization Detail Data input",
+            text: `There is empty input field in Realization Detail`,
             icon: "error",
             dangerMode: true,
-          });
+        });
+
         return false;
     }
 
@@ -62,12 +68,12 @@ $(document).ready(function() {
 
     const saveData = (datas) => {
         $.ajax({
-            url: "actions/cash-advances/save_data.php",
+            url: "actions/realizations/save_data.php",
             type: "POST",
             data: datas,
             success: function (response) {
                 if (response == "ok") {
-                    window.location.href = 'index.php?page=cash-advances'
+                    window.location.href = 'index.php?page=realizations'
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -84,6 +90,7 @@ $(document).ready(function() {
         $("#ca_created_date").val(first_row.ca_cd);
         $("#ca_modified_date").val(first_row.cd_ud);
         $("#file").attr('href', 'uploaded_files/'+first_row.file).text('Open File').attr('target', '_blank');
+        $("#total_ca").val(first_row.ca_total);
     }
 
     const fillCaDetail = (datas) => {
@@ -103,28 +110,48 @@ $(document).ready(function() {
     }
 
     $('#btnSaveRow').click(function() {
+        const total_ca = $("#total_ca").val();
+        const grand_total = $('#grand_total');
+
+
         let description = $('#description').val();
-        let qty = $('#qty').val();
-        let amount = $('#amount').val();
         let total = $('#total').val();
 
-        $("#caDetail").append(`
-            <tr>
-                <td style='width: 25%'>${description}</td>
-                <td style='width: 25%' class='text-right'>Rp. ${qty}</td>
-                <td style='width: 25%' class='text-right'>Rp. ${amount}</td>
-                <td style='width: 25%' class='text-right'>Rp. ${total}</td>
-            </tr>
-        `);
-
-        const grand_total = $('#grand_total');
         const new_total = parseInt(grand_total.val()) + parseInt(total);
-        grand_total.val(new_total);
 
-        const display_grand_total = $("#display_grand_total");
-        display_grand_total.text('Rp. ' + new_total);
-
-        clearForm();
+        if (description == "" || total <= 0) {
+            swal({
+                title: "Validation",
+                text: `Please fill description and total`,
+                icon: "error",
+                dangerMode: true,
+            });
+        }
+        else if (new_total > total_ca) {
+            swal({
+                title: "Validation",
+                text: `Total Realization is more than total cash advance`,
+                icon: "error",
+                dangerMode: true,
+            });
+        } else {    
+            $("#realizationDetail").append(`
+                <tr>
+                    <td style='width: 50%'>${description}</td>
+                    <td style='width: 50%' class='text-right'>Rp. ${total}</td>
+                </tr>
+            `);
+    
+            grand_total.val(new_total);
+    
+            const display_grand_total = $("#display_grand_total");
+            display_grand_total.text('Rp. ' + new_total);
+    
+            const difference = total_ca - new_total;
+            $("#display_difference").text('Rp. ' + difference);    
+            
+            clearForm();
+        }
     });
 
     $('#btnDeleteRow').click(function() {
@@ -133,6 +160,8 @@ $(document).ready(function() {
 
 
     $('#ca').change(function() {
+        clearCaInfo();
+        
         const id_ca = $(this).val();
         $.ajax({
             url: "actions/cash-advances/get_data.php",
@@ -149,26 +178,25 @@ $(document).ready(function() {
                console.log(textStatus, errorThrown);
             }
         });
+
+        // updateTotal();
     });
 
-    $('#btnSaveCa').click(function() {
+    $('#btnSaveRealization').click(function() {
         if(getData() && getDataDetail()) {
-                swal({
-                    title: "Confirm Save",
-                    text: `Are you sure you want to save CA'`,
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                  })
-                  .then((willSave) => {
-                    if (willSave) {
-                        uploadFile(function(filename){
-                            const values = {data: getData(), detail: getDataDetail()}
-                            values['data'].push(filename)
-                            saveData(values)
-                        })
-                    }
-                });
+            swal({
+                title: "Confirm Save",
+                text: `Are you sure you want to save Realization'`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willSave) => {
+                if (willSave) {
+                    const values = {data: getData(), detail: getDataDetail()}
+                    saveData(values)
+                }
+            });
         }
     });
 })

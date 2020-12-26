@@ -11,8 +11,8 @@
     'pic_name' => '',
     'division' => '',
     'is_realized' => '',
-    'ppn'   => 0,
-    'total'   => 0
+    'total'   => 0,
+    'difference'   => 0
   );
 
   $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -32,6 +32,7 @@
         padding: 0.45%;
     }
 </style>
+<input type="hidden" id="total_ca">
 <table class='table'>
     <tr>
         <th>ID Realization</th>
@@ -105,7 +106,7 @@
 </table>
 <table 
     class="table table-green"
-    style='margin-top: -1%'
+    style='margin-top: -1%;  overflow-y: auto; height: 10px;'
     id="caDetail"
 >
   <thead>
@@ -122,7 +123,7 @@
 </table>
 <table 
     class="table table-green"
-    style='margin-top: -1%'
+    style='margin-top: -1%;'
 >
   <thead>
     <tr>
@@ -146,7 +147,6 @@
                 class="form-control" 
                 id='total'
                 placeholder="0"
-                disabled
             />            
         </td>
         <td>
@@ -157,24 +157,13 @@
     </tr>
   </tbody>
 </table>
-<div style='margin-top: -1%; overflow-y: auto; height: 230px;'>
+<div style='margin-top: -1.2%; overflow-y: auto; height: 150px;'>
     <table class='table table-hover table-bordered'>
       <tbody style='cursor: pointer;' id='realizationDetail'>
       </tbody>
       <tfoot>
         <tr>
-            <td colspan="3" class="text-right">PPN</td>
-            <td style='width: 25%'>
-                <input 
-                    type="number" 
-                    id="ppn"
-                    class='form-control'
-                    value="<?php echo $data['ppn'] ?>"
-                />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" class="text-right">Grand Total</td>
+            <td class="text-right">Total</td>
             <td style='width: 25%' class='text-right'>
                 <input 
                     type="number" 
@@ -184,7 +173,21 @@
                 />
                 <span id='display_grand_total'>
                     <?php echo 'Rp. ' . $data['total'] ?>
-                </span>            
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-right">Selisih</td>
+            <td style='width: 25%' class='text-right'>
+                <input 
+                    type="number" 
+                    id='difference'
+                    class='d-none'
+                    value="<?php echo $data['difference'] ?>"
+                />            
+                <span id='display_difference'>
+                    <?php echo 'Rp. ' . $data['difference'] ?>
+                </span>
             </td>
         </tr>
       </tfoot>

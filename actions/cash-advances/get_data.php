@@ -10,6 +10,7 @@
                 ca.file,
                 ca.created_date ca_cd,
                 ca.updated_date ca_ud,
+                ca.total ca_total,
                 cad.description cad_description,
                 cad.total_amount cad_total 
             FROM 
