@@ -63,7 +63,7 @@
             >
                 <option value="">-- Select Cash Advance --</option>
                 <?php
-                    $ca_query = "SELECT * FROM cash_advances WHERE is_deleted = 0";
+                    $ca_query = "SELECT * FROM cash_advances WHERE status = 'APPV' AND is_deleted = 0";
                     $ca = $conn->query($ca_query);
                     if ($ca->num_rows > 0):
                         while ($ca_row = $ca->fetch_assoc()):		      				
@@ -77,23 +77,27 @@
                 ?>
             </select>
         </td>
-        <th>Nama Project</th>
-        <td>
-            <input type="text" id="project_name" class="form-control" disabled />
-        </td>
         <th>Nama PIC</th>
         <td>
             <input type="text" id="pic_name" class="form-control" disabled />
-        </td>        
-    </tr>    
-    <tr>
+        </td>    
         <th>Divisi</th>
         <td>
             <input type="text" id="division" class="form-control" disabled />
         </td>
+    </tr>    
+    <tr>
+        <th>Created Date</th>
+        <td>
+            <input type="text" id="ca_created_date" class="form-control" disabled />
+        </td>
+        <th>Modified Date</th>
+        <td>
+            <input type="text" id="ca_modified_date" class="form-control" disabled />
+        </td>
         <th>Berkas</th>
         <td>
-            <span id="file"></span>
+            <a id="file"></a>
         </td>
         <th></th>
         <td></td>
@@ -102,6 +106,7 @@
 <table 
     class="table table-green"
     style='margin-top: -1%'
+    id="caDetail"
 >
   <thead>
     <tr>
@@ -111,12 +116,7 @@
   </thead>
   <tbody>
     <tr>
-        <td>
-            Test
-        </td>
-        <td>
-            TEst 2
-        </td>
+        <td colspan="2" class='text-center'>No CA Selected</td>
     </tr>
   </tbody>
 </table>
@@ -190,4 +190,4 @@
       </tfoot>
     </table>
 </div>
-<script src="assets/js/realization/form.js"></script>
+<script src="assets/js/realizations/form.js"></script>
