@@ -2,23 +2,27 @@
     $id = isset($_GET['id']) ? $_GET['id'] : 0;
     $query = "
         SELECT 
-            ca.*,
+            r.*,
+            ca.description,
             u.nik 
-        FROM cash_advances ca
+        FROM realizations r
+        INNER JOIN cash_advances ca
+        ON r.cash_advance_id = ca.id
         INNER JOIN users u
         ON ca.created_by = u.id
         WHERE 
             ca.id = '$id'
     ";
     $datas = $conn->query($query);    
-    $ca = $datas->fetch_assoc();
+    $realization = $datas->fetch_assoc();
 ?>
 <?php
-    if($ca['status'] == 'Open'):
+    if($realization['status'] == 'Open'):
 ?>
     <button 
-        data-id='<?php echo $ca["id"]; ?>' 
-        data-description='<?php echo $ca["description"]; ?>' 
+        data-id='<?php echo $realization["id"]; ?>' 
+        data-ca-id='<?php echo $realization["cash_advance_id"]; ?>' 
+        data-description='<?php echo $realization["description"]; ?>' 
         class="btnApprove btn btn-success float-right"
     >
     Approve
@@ -26,51 +30,29 @@
 <?php
     endif;
 ?>
-<a href='index.php?page=cash-advances' class="btn btn-primary mr-1 float-right">List Cash Advance</a>
-<h1 class='text-center'>Detail Cash Advance</h1>
+<a href='index.php?page=realizations' class="btn btn-primary mr-1 float-right">List Realization</a>
+<h1 class='text-center'>Detail Realization</h1>
 <table class='table'>
     <tr>
-        <th>ID Cash Advance</th>
+        <th>ID Realization</th>
         <td>
-            <?php echo $ca['id'] ?>
+            <?php echo $realization['id'] ?>
         </td>
         <th>Number</th>
         <td>
-            <?php echo $ca['doc_num'] ?>
+            <?php echo $realization['doc_num'] ?>
         </td>
     </tr>
     <tr>
-        <th>NIK Karyawan</th>
+        <th>Cash Advance</th>
         <td>
-            <?php echo $ca['nik'] ?>            
+            <?php echo $realization['description'] ?>            
         </td>
-        <th>Divisi</th>
+        <th>Status</th>
         <td>
-            <?php echo $ca['division'] ?>
+            <?php echo $realization['status'] ?>
         </td>
     </tr>    
-    <tr>
-        <th>Nama Project</th>
-        <td>
-            <?php echo $ca['description'] ?>
-        </td>
-        <th>Nama PIC</th>
-        <td>
-            <?php echo $ca['pic_name'] ?>
-        </td>
-    </tr>
-    <tr>
-        <th>Keterangan CA</th>
-        <td>
-            <?php echo $ca['status'] ?>
-        </td>
-        <th>Berkas</th>
-        <td>
-            <a target="_blank" href='uploaded_files/<?php echo $ca['file'] ?>'>
-                <?php echo $ca['file'] ?>
-            </a>
-        </td>
-    </tr>       
 </table>
 <table 
     class="table table-green"
@@ -78,14 +60,12 @@
   <thead>
     <tr>
       <th>Description</th>
-      <th>Qty</th>
-      <th>Bugdet Estimation</th>
-      <th>Total</th>
+      <th>Amount</th>
     </tr>
   </thead>
   <tbody>
       <?php
-            $query = "SELECT * FROM cash_advance_details WHERE cash_advance_id = '$id'";
+            $query = "SELECT * FROM realization_details WHERE realization_id = '$id'";
             $datas = $conn->query($query);
             if ($datas->num_rows > 0):
                 $i = 0;
@@ -97,13 +77,7 @@
                         <?php echo $row['description'] ?>
                     </td>
                     <td>
-                        <?php echo $row['qty'] ?>
-                    </td>
-                    <td>
                         <?php echo $row['amount'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['total_amount'] ?>
                     </td>
                 </tr>
         <?php
@@ -113,15 +87,15 @@
   </tbody>
   <tfoot>
     <tr>
-            <td colspan="2"></td>
-            <td>PPN</td>
-            <td></td>
-    </tr>
-    <tr>
-            <td colspan="2"></td>
             <td>Jumlah</td>
             <td>
-                <?php echo $ca['total'] ?>        
+                <?php echo $realization['total'] ?>        
+            </td>
+    </tr>
+    <tr>
+            <td>Selisih</td>
+            <td>
+                <?php echo $realization['difference'] ?>        
             </td>
     </tr>
     <tr>
@@ -129,4 +103,4 @@
     </tr>
   </tfoot>
 </table>
-<script src="assets/js/cash-advances/approve.js"></script>
+<script src="assets/js/realizations/approve.js"></script>

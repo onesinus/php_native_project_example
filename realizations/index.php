@@ -29,7 +29,7 @@
         #
     </th>
       <th>Number</th>
-      <th>Description</th>
+      <th>Cash Advance</th>
       <th>Total</th>
       <th>Status</th>
       <th>Created</th>
@@ -42,7 +42,17 @@
   </thead>
   <tbody>
       <?php
-            $query = "SELECT * FROM realizations WHERE is_deleted = 0";
+            $query = "
+                SELECT 
+                    r.*,
+                    ca.description
+                FROM 
+                    realizations r
+                INNER JOIN cash_advances ca
+                ON r.cash_advance_id = ca.id
+                WHERE 
+                    r.is_deleted = 0
+                ";
             $datas = $conn->query($query);
             if ($datas->num_rows > 0):
                 $i = 0;
@@ -70,18 +80,19 @@
                     </td>
 
                     <td>
-                        <a href='index.php?page=cash-advances&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
+                        <a href='index.php?page=realizations&action=detail&id=<?php echo $row["id"]; ?>' class="btn btn-success">
                             Detail
                         </a>
 
                         <?php
                             if($row['status'] == 'Open'):
                         ?>
-                            <!-- <a href='index.php?page=cash-advances&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
+                            <!-- <a href='index.php?page=realizations&action=form&id=<?php echo $row["id"]; ?>' class="btn btn-warning">
                                 Edit
                             </a> -->
                             <button 
                                 data-id='<?php echo $row["id"]; ?>' 
+                                data-ca-id='<?php echo $row["cash_advance_id"]; ?>' 
                                 data-description='<?php echo $row["description"]; ?>' 
                                 class="btnDelete btn btn-danger"
                             >

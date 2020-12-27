@@ -8,8 +8,8 @@
   $page = isset($_GET['page']) ? $_GET['page'] : '';
 
   $user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
-  $username = $user['username'];
-  $user_id = $user['id'];
+  $username = isset($user['username']) ? $user['username'] : '';
+  $user_id = isset($user['id']) ? $user['id'] : 0;
 
   $activeMenuClass = "alert alert-dark";
 ?>

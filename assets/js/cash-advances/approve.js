@@ -4,14 +4,14 @@ $(".btnApprove").on('click', function() {
     
     if(ca_id) {
         swal({
-            title: "Confirm Delete",
-            text: `Are you sure you want to delete '${description}'`,
+            title: "Confirm Approve",
+            text: `Are you sure you want to approve '${description}'`,
             icon: "warning",
             buttons: true,
             dangerMode: true,
           })
-          .then((willDelete) => {
-            if (willDelete) {
+          .then((willApprove) => {
+            if (willApprove) {
                 window.location.href = `actions/cash-advances/approve_data.php?id=${ca_id}`;
             }
           });

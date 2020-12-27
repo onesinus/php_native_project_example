@@ -16,8 +16,9 @@ $(document).ready(function() {
         let doc_num = $("#doc_num").val();
         let ca = $("#ca").val();
         let total = $("#grand_total").val();
+        let difference = $("#difference").val();
 
-        let data = [doc_num, ca, total];
+        let data = [doc_num, ca, total, difference];
         if(data.includes("")) {
             swal({
                 title: "Please fill all Realization Data input",
@@ -89,7 +90,9 @@ $(document).ready(function() {
         $("#division").val(first_row.division);
         $("#ca_created_date").val(first_row.ca_cd);
         $("#ca_modified_date").val(first_row.cd_ud);
-        $("#file").attr('href', 'uploaded_files/'+first_row.file).text('Open File').attr('target', '_blank');
+        if ( first_row.file != '' ) {
+            $("#file").attr('href', 'uploaded_files/'+first_row.file).text('Open File').attr('target', '_blank');
+        }
         $("#total_ca").val(first_row.ca_total);
     }
 
@@ -109,15 +112,34 @@ $(document).ready(function() {
         })
     }
 
+    const updateRealizationDetail = () => {
+        const grand_total = $('#grand_total');
+        const difference = $("#difference");
+        const total_ca = $("#total_ca").val();
+
+        let total = $('#total').val();
+
+        const new_total = (parseFloat(grand_total.val()) || 0) + (parseFloat(total) || 0);
+
+        grand_total.val(new_total);
+    
+        const display_grand_total = $("#display_grand_total");
+        display_grand_total.text('Rp. ' + new_total);
+
+        const difference_value = (total_ca - new_total).toFixed(2);
+
+        $("#display_difference").text('Rp. ' + difference_value);    
+        difference.val(difference_value);
+    }
+
     $('#btnSaveRow').click(function() {
         const total_ca = $("#total_ca").val();
         const grand_total = $('#grand_total');
 
-
         let description = $('#description').val();
         let total = $('#total').val();
 
-        const new_total = parseInt(grand_total.val()) + parseInt(total);
+        const new_total = parseFloat(grand_total.val()) + parseFloat(total);
 
         if (description == "" || total <= 0) {
             swal({
@@ -142,14 +164,7 @@ $(document).ready(function() {
                 </tr>
             `);
     
-            grand_total.val(new_total);
-    
-            const display_grand_total = $("#display_grand_total");
-            display_grand_total.text('Rp. ' + new_total);
-    
-            const difference = total_ca - new_total;
-            $("#display_difference").text('Rp. ' + difference);    
-            
+            updateRealizationDetail()
             clearForm();
         }
     });
@@ -179,7 +194,7 @@ $(document).ready(function() {
             }
         });
 
-        // updateTotal();
+        updateRealizationDetail();
     });
 
     $('#btnSaveRealization').click(function() {
