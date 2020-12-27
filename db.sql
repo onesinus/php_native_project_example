@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 08:49 AM
+-- Generation Time: Dec 27, 2020 at 11:53 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -51,7 +51,7 @@ CREATE TABLE `cash_advances` (
 INSERT INTO `cash_advances` (`id`, `doc_num`, `description`, `total`, `status`, `created_by`, `created_date`, `updated_by`, `updated_date`, `is_deleted`, `pic_name`, `division`, `is_realized`, `file`) VALUES
 (1, 'CA1', 'Project Promo akhir tahun', '999999.99', 'APPV', 14, '2020-12-27 13:17:28', NULL, NULL, 1, 'jack sihombing', 'Marketing', 0, ''),
 (2, 'CA2', 'Event penjualan akhirtahun', '26000000.00', 'Closed', 14, '2020-12-27 13:37:20', NULL, NULL, 0, 'Ucok Sidabutar', 'Sales', 0, 'linked list.png'),
-(3, 'CA3', 'Pengadaan komputer', '15000000.00', 'APPV', 14, '2020-12-27 14:47:20', NULL, NULL, 0, 'Onesinus SPT', 'IT', 0, 'gajee.PNG');
+(3, 'CA3', 'Pengadaan komputer', '15000000.00', 'Paid', 14, '2020-12-27 14:47:20', NULL, NULL, 0, 'Onesinus SPT', 'IT', 0, 'gajee.PNG');
 
 -- --------------------------------------------------------
 
@@ -86,6 +86,35 @@ INSERT INTO `cash_advance_details` (`id`, `cash_advance_id`, `description`, `qty
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `realization_id` int(11) NOT NULL,
+  `payment_type` varchar(25) NOT NULL,
+  `bank` varchar(25) DEFAULT NULL,
+  `account_number` varchar(50) DEFAULT NULL,
+  `account_name` varchar(125) DEFAULT NULL,
+  `amount` decimal(16,2) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `realization_id`, `payment_type`, `bank`, `account_number`, `account_name`, `amount`, `status`, `created_by`, `created_date`, `updated_by`, `updated_date`, `is_deleted`) VALUES
+(4, 3, 'cash', '', '', '', '50000.00', 'Closed', 14, '2020-12-27 17:52:01', NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `realizations`
 --
 
@@ -93,23 +122,24 @@ CREATE TABLE `realizations` (
   `id` int(11) NOT NULL,
   `cash_advance_id` int(11) NOT NULL,
   `doc_num` varchar(25) NOT NULL,
+  `total` decimal(16,2) NOT NULL,
+  `difference` decimal(16,2) NOT NULL,
   `status` varchar(10) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_by` int(11) DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  `total` decimal(16,2) NOT NULL,
-  `difference` decimal(16,2) NOT NULL
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `realizations`
 --
 
-INSERT INTO `realizations` (`id`, `cash_advance_id`, `doc_num`, `status`, `created_by`, `created_date`, `updated_by`, `updated_date`, `is_deleted`, `total`, `difference`) VALUES
-(1, 1, 'R1', 'Open', 14, '2020-12-27 14:16:22', NULL, NULL, 1, '25750002.00', '249998.00'),
-(2, 2, 'R2', 'Closed', 14, '2020-12-27 14:37:28', NULL, NULL, 0, '26000000.00', '0.00');
+INSERT INTO `realizations` (`id`, `cash_advance_id`, `doc_num`, `total`, `difference`, `status`, `created_by`, `created_date`, `updated_by`, `updated_date`, `is_deleted`) VALUES
+(1, 1, 'R1', '25750002.00', '249998.00', 'Open', 14, '2020-12-27 14:16:22', NULL, NULL, 1),
+(2, 2, 'R2', '26000000.00', '0.00', 'Closed', 14, '2020-12-27 14:37:28', NULL, NULL, 0),
+(3, 3, 'R3', '15000000.00', '0.00', 'Open', 14, '2020-12-27 16:41:26', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -138,7 +168,8 @@ INSERT INTO `realization_details` (`id`, `realization_id`, `description`, `amoun
 (2, 1, 'test 2', '250000.00', 14, '2020-12-27 14:16:22', NULL, NULL, 1),
 (3, 1, 'test 3', '2500000.00', 14, '2020-12-27 14:16:22', NULL, NULL, 1),
 (4, 1, 'test 3', '23000000.00', 14, '2020-12-27 14:16:22', NULL, NULL, 1),
-(5, 2, 'Test', '26000000.00', 14, '2020-12-27 14:37:28', NULL, NULL, 0);
+(5, 2, 'Test', '26000000.00', 14, '2020-12-27 14:37:28', NULL, NULL, 0),
+(6, 3, 'PC', '15000000.00', 14, '2020-12-27 16:41:26', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -194,6 +225,12 @@ ALTER TABLE `cash_advance_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `realizations`
 --
 ALTER TABLE `realizations`
@@ -222,16 +259,22 @@ ALTER TABLE `cash_advance_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `realizations`
 --
 ALTER TABLE `realizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `realization_details`
 --
 ALTER TABLE `realization_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

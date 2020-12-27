@@ -10,7 +10,6 @@
     'description' => '',
     'pic_name' => '',
     'division' => '',
-    'is_realized' => '',
     'total'   => 0,
     'difference'   => 0
   );
@@ -18,7 +17,7 @@
   $id = isset($_GET['id']) ? $_GET['id'] : 0;
   $title = $id == 0 ? 'Add Realization' : 'Edit Realization';
   if($id) {
-    $query = "SELECT * FROM cash_advances WHERE id = '$id'";
+    $query = "SELECT * FROM realizations WHERE id = '$id'";
     $execute_query = $conn->query($query);    
     $data = $execute_query->fetch_assoc();    
   }
