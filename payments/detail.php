@@ -2,105 +2,65 @@
     $id = isset($_GET['id']) ? $_GET['id'] : 0;
     $query = "
         SELECT 
-            r.*,
-            ca.description,
+            p.*,
+            r.doc_num r_doc_num,
+            ca.description ca_description,
             u.nik 
-        FROM realizations r
+        FROM payments p
+        INNER JOIN realizations r
+        ON r.id = p.realization_id
         INNER JOIN cash_advances ca
-        ON r.cash_advance_id = ca.id
+        ON ca.id = r.cash_advance_id
         INNER JOIN users u
-        ON ca.created_by = u.id
+        ON p.created_by = u.id
         WHERE 
-            ca.id = '$id'
+            p.id = '$id'
     ";
-    $datas = $conn->query($query);    
+
+    $datas = $conn->query($query) or die(mysqli_error($conn));
     $realization = $datas->fetch_assoc();
 ?>
-<?php
-    if($realization['status'] == 'Open'):
-?>
-    <button 
-        data-id='<?php echo $realization["id"]; ?>' 
-        data-ca-id='<?php echo $realization["cash_advance_id"]; ?>' 
-        data-description='<?php echo $realization["description"]; ?>' 
-        class="btnApprove btn btn-success float-right"
-    >
-    Approve
-    </button>
-<?php
-    endif;
-?>
-<a href='index.php?page=realizations' class="btn btn-primary mr-1 float-right">List Realization</a>
-<h1 class='text-center'>Detail Realization</h1>
+<a href='index.php?page=payments' class="btn btn-primary mr-1 float-right">List Payment</a>
+<h1 class='text-center'>Detail Payment</h1>
 <table class='table'>
     <tr>
-        <th>ID Realization</th>
+        <th>ID Payment</th>
         <td>
             <?php echo $realization['id'] ?>
         </td>
-        <th>Number</th>
+        <th>Realization</th>
         <td>
-            <?php echo $realization['doc_num'] ?>
+            <?php echo $realization['r_doc_num'] ?>
         </td>
     </tr>
     <tr>
         <th>Cash Advance</th>
         <td>
-            <?php echo $realization['description'] ?>            
+            <?php echo $realization['ca_description'] ?>            
         </td>
-        <th>Status</th>
+        <th>Amount</th>
         <td>
-            <?php echo $realization['status'] ?>
+            <?php echo $realization['amount'] ?>
+        </td>
+    </tr>    
+    <tr>
+        <th>Payment Type</th>
+        <td>
+            <?php echo $realization['payment_type'] ?>            
+        </td>
+        <th>Bank</th>
+        <td>
+            <?php echo $realization['bank'] ?>
+        </td>
+    </tr>    
+    <tr>
+        <th>Account Number</th>
+        <td>
+            <?php echo $realization['account_number'] ?>            
+        </td>
+        <th>Account Name</th>
+        <td>
+            <?php echo $realization['account_name'] ?>
         </td>
     </tr>    
 </table>
-<table 
-    class="table table-green"
->
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-      <?php
-            $query = "SELECT * FROM realization_details WHERE realization_id = '$id'";
-            $datas = $conn->query($query);
-            if ($datas->num_rows > 0):
-                $i = 0;
-                while ($row = $datas->fetch_assoc()):		      				
-                    $i++;
-      ?>
-                <tr>
-                    <td>
-                        <?php echo $row['description'] ?>
-                    </td>
-                    <td>
-                        <?php echo $row['amount'] ?>
-                    </td>
-                </tr>
-        <?php
-                endwhile;
-            endif;
-        ?>
-  </tbody>
-  <tfoot>
-    <tr>
-            <td>Jumlah</td>
-            <td>
-                <?php echo $realization['total'] ?>        
-            </td>
-    </tr>
-    <tr>
-            <td>Selisih</td>
-            <td>
-                <?php echo $realization['difference'] ?>        
-            </td>
-    </tr>
-    <tr>
-        <th colspan='7'></th>
-    </tr>
-  </tfoot>
-</table>
-<script src="assets/js/realizations/approve.js"></script>

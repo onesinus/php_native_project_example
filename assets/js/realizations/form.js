@@ -201,7 +201,7 @@ $(document).ready(function() {
         if(getData() && getDataDetail()) {
             swal({
                 title: "Confirm Save",
-                text: `Are you sure you want to save Realization'`,
+                text: `Are you sure you want to save Realization`,
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

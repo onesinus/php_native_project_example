@@ -44,6 +44,7 @@
       <?php
             $query = "
                 SELECT
+                    p.id,
                     r.doc_num realization_number,
                     ca.doc_num ca_number,
                     p.amount,

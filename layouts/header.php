@@ -38,7 +38,15 @@
     <a class="p-2 text-dark <?php if ($page == 'cash-advances'){ echo $activeMenuClass; } ?>" href="index.php?page=cash-advances">Cash Advances</a>
     <a class="p-2 text-dark <?php if ($page == 'realizations'){ echo $activeMenuClass; } ?>" href="index.php?page=realizations">Realizations</a>
     <a class="p-2 text-dark <?php if ($page == 'payments'){ echo $activeMenuClass; } ?>" href="index.php?page=payments">Payments</a>
-    <a class="p-2 text-dark <?php if ($page == 'reports'){ echo $activeMenuClass; } ?>" href="index.php?page=reports">Reports</a>
+    <button class="btn dropdown-toggle mb-1" type="button" id="dropdownReport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Reports
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownReport">
+      <a class="dropdown-item" href="index.php?page=reports" class='<?php if ($page == 'reports'){ echo $activeMenuClass; } ?>'>Cash Advance</a>
+      <a class="dropdown-item" href="index.php?page=reports&action=outstanding_realization">Outstanding Realization</a>
+      <a class="dropdown-item" href="index.php?page=reports&action=payment_outstanding_ca">Payment Oustanding CA</a>
+      <a class="dropdown-item" href="index.php?page=reports&action=payment_outstanding_realization">Payment Outstanding Realization</a>
+    </div>
   </nav>
   <div class="btn-group">
     <button type="button" class="btn btn-success">
