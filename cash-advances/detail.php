@@ -12,9 +12,12 @@
     ";
     $datas = $conn->query($query);    
     $ca = $datas->fetch_assoc();
+
+    $user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
+    $role = isset($user["role"]) ? $user["role"] : '';
 ?>
 <?php
-    if($ca['status'] == 'Open'):
+    if($ca['status'] == 'Open' && in_array($role, ['Management', 'IT'])):
 ?>
     <button 
         data-id='<?php echo $ca["id"]; ?>' 
@@ -60,7 +63,7 @@
         </td>
     </tr>
     <tr>
-        <th>Keterangan CA</th>
+        <th>Status</th>
         <td>
             <?php echo $ca['status'] ?>
         </td>

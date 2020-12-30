@@ -85,7 +85,7 @@
             foreach($roles as $role):
           ?>
             <option 
-              value='Admin'
+              value='<?php echo $role; ?>'
               <?php if($data['role'] == $role) { echo 'selected="selected"'; }  ?>
             >
               <?php echo $role; ?>

@@ -14,7 +14,7 @@
 		$is_realized = $_POST['data'][4] == 'true' ? 1 : 0;
 		$total = isset($_POST['data'][5]) ? (int)$_POST['data'][5] : 0;
 		$file = isset($_POST['data'][6]) ? $_POST['data'][6] : '';
-		$status = $is_realized == True ? "Closed" : "Open";
+		$status = "Open";
 		
 		$user = isset($_SESSION['user_logged_in']) ? $_SESSION['user_logged_in'] : null;
 		$user_id = $user["id"];
@@ -66,7 +66,7 @@
 			";
 
 			foreach ($_POST['detail'] as $key => $value) {
-				if(!empty($value[0])) {
+				if(isset($value[0])) {
 					$description = isset($value[0]) ? $value[0] : '';
 					$qty = isset($value[1]) ? (int)$value[1] : 0;
 					$amount = isset($value[2]) ? (int)$value[2] : 0;
@@ -86,7 +86,6 @@
 					}
 				}
 			}
-			// print($query); exit;			
 		}
 
 		if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE) {

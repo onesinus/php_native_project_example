@@ -94,7 +94,7 @@
   </tbody>
   <tfoot>
     <tr>
-        <th colspan='5'></th>
+        <th colspan='6'></th>
     </tr>
   </tfoot>
 </table>

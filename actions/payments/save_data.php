@@ -8,9 +8,9 @@
 		
 		$id = isset($_POST['id']) ? $_POST['id'] : 0;
 		$ca_id = isset($_POST['ca_id']) ? $_POST['ca_id'] : 0;
-		$realization_id = isset($_POST['data'][0]) ? $_POST['data'][0] : 0;
-		$payment_type = isset($_POST['data'][1]) ? $_POST['data'][1] : '';
-		$amount = isset($_POST['data'][2]) ? $_POST['data'][2] : '';
+		$payment_type = isset($_POST['data'][0]) ? $_POST['data'][0] : '';
+		$amount = isset($_POST['data'][1]) ? $_POST['data'][1] : '';
+		$realization_id = isset($_POST['data'][2]) ? $_POST['data'][2] : 0;
 		$bank = isset($_POST['data'][3]) ? $_POST['data'][3] : '';
 		$account_number = isset($_POST['data'][4]) ? $_POST['data'][4] : '';
 		$account_name = isset($_POST['data'][5]) ? $_POST['data'][5] : '';
@@ -29,6 +29,7 @@
 			
 			$query = "INSERT INTO payments (
 				realization_id, 
+				cash_advance_id,
 				payment_type, 
 				bank,
 				account_number,
@@ -38,6 +39,7 @@
 				created_by
 			) VALUES(
 				'$realization_id', 
+				'$ca_id', 
 				'$payment_type', 
 				'$bank', 
 				'$account_number', 

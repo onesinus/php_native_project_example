@@ -1,15 +1,26 @@
 $(document).ready(function() {
     const validateData = () => {
         let realization = $("#realization").val();
+        let ca = $("#cash_advance_id").val();
+
         let payment_type = $("#payment_type").val();
         let bank = $("#bank").val();
         let account_number = $("#account_number").val();
         let account_name = $("#account_name").val();
         let amount = $("#amount").val();
 
-        let data = [realization, payment_type, amount];
+        let data = [payment_type, amount];
 
-        if (payment_type == "transfer") {
+        if (realization == "" && ca == "") {
+            swal({
+                title: "Validation",
+                text: `Please select realization or cash advance document`,
+                icon: "error",
+                dangerMode: true,
+              });
+            return false;
+        }
+        else if (payment_type == "transfer") {
             if (bank == "" || account_name == "" || account_number == "") {
                 swal({
                     title: "Validation",
@@ -23,7 +34,7 @@ $(document).ready(function() {
             if(data.includes("")) {
                 swal({
                     title: "Validation",
-                    text: `Please select Realization and select Payment Type`,
+                    text: `Please select Payment Type and input amount`,
                     icon: "error",
                     dangerMode: true,
                   });
@@ -31,7 +42,7 @@ $(document).ready(function() {
             }    
         }
 
-        data.push(bank, account_number, account_name);
+        data.push(realization, bank, account_number, account_name);
 
         return data;        
     }
@@ -57,6 +68,8 @@ $(document).ready(function() {
     }
 
     const clearForm = () => {
+        $("#realization").val("");
+        $("#cash_advance_id").val("");
         $("#cash_advance").val("");
         $("#nik_karyawan").val("");
         $("#realization_created_date").val("");
@@ -73,6 +86,47 @@ $(document).ready(function() {
         $("#realization_modified_date").val(first_row.updated_date);
     }
 
+    const fillCaData = (datas) => {
+        const first_row = datas[0];
+        
+        $("#cash_advance").val(first_row.ca_description);
+        $("#nik_karyawan").val(first_row.nik);
+        $("#realization_created_date").val(first_row.created_date);
+        $("#realization_modified_date").val(first_row.updated_date);
+        $("#amount").val(first_row.ca_total);
+    }
+
+    $("#based_on").change(function() {
+        clearForm();
+
+        const based_on = $(this).val();
+        if (based_on == 'ca') {
+            $("#realization").attr('disabled', true);
+            $("#cash_advance_id").removeAttr('disabled');
+        }else {
+            $("#cash_advance_id").attr('disabled', true);
+            $("#realization").removeAttr('disabled');
+        }
+    });
+
+    $("#cash_advance_id").change(function() {
+        const id_ca = $(this).val();
+        $.ajax({
+            url: "actions/cash-advances/get_data.php",
+            type: "GET",
+            data: { id_ca },
+            success: function (response) {
+                response = JSON.parse(response);
+                if (response.length > 0) {
+                    fillCaData(response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });        
+    });
+
     $('#realization').change(function() {        
         const id_realization = $(this).val();
         $.ajax({
@@ -80,7 +134,6 @@ $(document).ready(function() {
             type: "GET",
             data: { id_realization },
             success: function (response) {
-                clearForm();
                 response = JSON.parse(response);
                 if (response.length > 0) {
                     fillRealizationData(response);

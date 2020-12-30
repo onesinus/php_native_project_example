@@ -3,7 +3,7 @@
         session_start();
     }
 ?>
-<title>Login Project ABC</title>
+<title>Login</title>
 <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
 <?php
     require "layouts/header.php";
@@ -39,7 +39,7 @@
                 placeholder="Masukkan Password"
             >
         </div>
-        <button type="submit" class="btn btn-primary col-md-12">Login</button>
+        <button type="submit" class="btn btn-success col-md-12">Login</button>
     </form>
 </main>
 <?php

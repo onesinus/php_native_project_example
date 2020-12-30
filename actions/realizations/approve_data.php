@@ -6,7 +6,7 @@
 		$ca_id = isset($_GET['ca_id']) ? $_GET['ca_id'] : 0;
 
         $query = "UPDATE realizations SET status = 'Closed' WHERE id = '$id';";
-        $query2 = "UPDATE cash_advances SET status = 'Closed' WHERE id = '$ca_id';";
+        $query2 = "UPDATE cash_advances SET status = 'Closed' AND is_realized = 1 WHERE id = '$ca_id';";
 
 		if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE) {
 			session_start();

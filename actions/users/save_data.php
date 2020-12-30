@@ -13,7 +13,7 @@
 		$jabatan 	= $_POST['jabatan'];
 		$role       = $_POST['role'];
 
-		if($id) { // handle edit data
+		if(!empty($id)) { // handle edit data
 			$_SESSION['message'] = 'User has been updated';
 
 			$query = "UPDATE 

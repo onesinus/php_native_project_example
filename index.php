@@ -9,7 +9,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Project ABC</title>
+      <title>Cash Advance Apps</title>
       <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
       <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
       <link href='assets/css/loading.css' rel='stylesheet' />    
