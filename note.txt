@@ -2,7 +2,7 @@
 Hak akses ( lihat requirement ) prioritas 3 ( prioritas 1 hide menu sesuai hak akses, kalau udah beres benahin approval )
 
 ======= 
-Aktifkan field ( prioritas 2 )
+Aktifkan field ( prioritas 2 ) (OTW)
 
 PPN ( menambahkan nilai )
 PPH ( mengurangi nilai )
@@ -10,10 +10,10 @@ PPH ( mengurangi nilai )
 =====
 Flow (prioritas 1)
 
-kondisi 1:
+kondisi 1: (Y)
 Buat CA + is_realized -> approve CA (APPV) -> payment -> pilih CA -> Save Payment -> CA (Closed)
 
-kondisi 2
+kondisi 2 (Y)
 Buat CA -> approve CA (APPV) -> Payment -> Pilih CA -> Save Payment -> CA (On Realization) 
 	-> Add Realization -> Pilih CA -> Save Realization -> CA (status CA tergantung)
 		*jika dikasih 1jt, realisasi 1jt -> CA (Closed)
@@ -21,10 +21,9 @@ Buat CA -> approve CA (APPV) -> Payment -> Pilih CA -> Save Payment -> CA (On Re
 	-> Add Payment -> Pilih Ca -> Save Payment -> CA (Closed)
 
 ===========
-Report ada from date, to date
-
+Report ada from date, to date (Y)
 ============== Report
 
-Outstanding realization -> CA yang statusnya On Realization
-Payment outstanding CA -> CA yang status APPV
-Payment outstading realization -> CA yang statusnya PAY
+Outstanding realization -> CA yang statusnya On Realization (Y)
+Payment outstanding CA -> CA yang status APPV (Y)
+Payment outstading realization -> CA yang statusnya PAY (Y)
