@@ -50,11 +50,15 @@
 			);";
 
 			$query2 = "
-				UPDATE cash_advances SET status = 'Paid' WHERE id = '$ca_id';
+				UPDATE cash_advances SET status = 'Closed' WHERE id = '$ca_id' AND is_realized = 1;
+			";
+
+			$query3 = "
+				UPDATE cash_advances SET status = 'Paid' WHERE id = '$ca_id' AND is_realized = 0;
 			";
 		}
 
-		if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE) {
+		if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE && $conn->query($query3) === TRUE) {
 			echo "ok";
 		}else {
 			echo "Error: " . $conn->error;

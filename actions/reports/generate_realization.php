@@ -2,17 +2,18 @@
 	require "../../configurations/connect.php";
 
 	if (isset($_POST)) {
-        $date = isset($_POST['date']) ? $_POST['date'] : '';
+        $from_date = isset($_POST['from_date']) ? $_POST['from_date'] : '';
+        $to_date = isset($_POST['to_date']) ? $_POST['to_date'] : '';
 
         $query = "
-            SELECT * FROM realizations
+            SELECT * FROM cash_advances
         ";
 
-        if($date) {
-            $query .= "WHERE created_date >= '$date 00:00:00' AND created_date <= '$date 23:59:59'";
+        if($from_date && $to_date) {
+            $query .= "WHERE created_date >= '$from_date 00:00:00' AND created_date <= '$to_date 23:59:59'";
         }
 
-        $query .= " AND status = 'Open' AND is_deleted = 0";
+        $query .= " AND is_realized = 0 AND is_deleted = 0";
 
         if ($data = $conn->query($query)) {
             $arr_datas = array();

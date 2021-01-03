@@ -4,14 +4,14 @@
         SELECT 
             r.*,
             ca.description,
-            u.nik 
+            u.nik
         FROM realizations r
         INNER JOIN cash_advances ca
         ON r.cash_advance_id = ca.id
         INNER JOIN users u
         ON ca.created_by = u.id
         WHERE 
-            ca.id = '$id'
+            r.id = '$id'
     ";
     $datas = $conn->query($query);    
     $realization = $datas->fetch_assoc();
@@ -23,6 +23,7 @@
         data-id='<?php echo $realization["id"]; ?>' 
         data-ca-id='<?php echo $realization["cash_advance_id"]; ?>' 
         data-description='<?php echo $realization["description"]; ?>' 
+        data-difference='<?php echo $realization["difference"]; ?>' 
         class="btnApprove btn btn-success float-right"
     >
     Approve

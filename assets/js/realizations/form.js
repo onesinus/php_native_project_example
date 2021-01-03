@@ -149,14 +149,15 @@ $(document).ready(function() {
                 dangerMode: true,
             });
         }
-        else if (new_total > total_ca) {
+        /* else if (new_total > total_ca) {
             swal({
                 title: "Validation",
                 text: `Total Realization is more than total cash advance`,
                 icon: "error",
                 dangerMode: true,
             });
-        } else {    
+        } */ 
+        else {    
             $("#realizationDetail").append(`
                 <tr>
                     <td style='width: 50%'>${description}</td>

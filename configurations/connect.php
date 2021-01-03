@@ -3,8 +3,7 @@
 
 	$username = "root";
 	$password = "";
-	$database = "php_project_1";
-
+	$database = "ca";
 
 	// $username = "id15523280_root";
 	// $password = "fEh/(5=M{D8yu-7F";

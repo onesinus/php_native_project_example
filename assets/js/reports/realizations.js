@@ -20,22 +20,26 @@ $(document).ready(function() {
             `)
         })
     }
-    $("#filter_date").change(function() {
-        let date = $("#filter_date").val();
-        
-        $.ajax({
-            url: "actions/reports/generate_realization.php",
-            type: "POST",
-            data: { date },
-            success: function (response) {
-                if (response) {
-                    response = JSON.parse(response);
-                    fillReportData(response)
+    $("#from_date, #to_date").change(function() {
+        let from_date = $("#from_date").val();
+        let to_date = $("#to_date").val();
+
+        if (from_date && to_date) {
+            $.ajax({
+                url: "actions/reports/generate_realization.php",
+                type: "POST",
+                data: { from_date, to_date },
+                success: function (response) {
+                    if (response) {
+                        response = JSON.parse(response);
+                        fillReportData(response)
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus, errorThrown);
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-               console.log(textStatus, errorThrown);
-            }
-        });
+            });
+        }
+
     });
 });

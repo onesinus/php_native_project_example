@@ -2,9 +2,13 @@
 
 <table class='table'>
     <tr>
-        <th>Date</th>
+        <th>From</th>
         <td>
-            <input class='form-control col-md-4' type="date" id="filter_date">
+            <input class='form-control col-md-6' type="date" id="from_date">
+        </td>
+        <th>To</th>
+        <td>
+            <input class='form-control col-md-6' type="date" id="to_date">
         </td>
         <th>Status</th>
         <td>

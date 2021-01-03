@@ -53,10 +53,10 @@
                     r.cash_advance_id,
                     ca.description
                 FROM payments p
-                INNER JOIN realizations r
+                LEFT JOIN realizations r
                 ON p.realization_id = r.id
-                INNER JOIN cash_advances ca
-                ON ca.id = r.cash_advance_id
+                LEFT JOIN cash_advances ca
+                ON p.cash_advance_id = ca.id
                 WHERE 
                     p.is_deleted = 0
             ";

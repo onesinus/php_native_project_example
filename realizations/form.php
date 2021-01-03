@@ -49,7 +49,7 @@
                 class="form-control" 
                 id='doc_num'
                 value="<?php echo $data['doc_num'] ?>"
-                placeholder='Input your CA Number'
+                placeholder='Input your Realization Number'
                 autocomplete="off"
             />
         </td>
@@ -63,7 +63,7 @@
             >
                 <option value="">-- Select Cash Advance --</option>
                 <?php
-                    $ca_query = "SELECT * FROM cash_advances WHERE status = 'APPV' AND is_realized=0 AND is_deleted = 0";
+                    $ca_query = "SELECT * FROM cash_advances WHERE is_realized=0 AND is_deleted = 0";
                     $ca = $conn->query($ca_query);
                     if ($ca->num_rows > 0):
                         while ($ca_row = $ca->fetch_assoc()):		      				

@@ -71,7 +71,7 @@
             <select class='form-control' id="cash_advance_id" disabled>
                 <option value="">-- Select Cash Advance --</option>
                 <?php
-                    $ca_query = "SELECT * FROM cash_advances WHERE status = 'APPV' AND is_deleted = 0";
+                    $ca_query = "SELECT * FROM cash_advances WHERE (status = 'APPV' OR status = 'Pay') AND is_deleted = 0";
                     $ca = $conn->query($ca_query);
                     if ($ca->num_rows > 0):
                         while ($ca_row = $ca->fetch_assoc()):		      				
