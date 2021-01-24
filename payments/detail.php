@@ -7,9 +7,9 @@
             ca.description ca_description,
             u.nik 
         FROM payments p
-        INNER JOIN realizations r
+        LEFT JOIN realizations r
         ON r.id = p.realization_id
-        INNER JOIN cash_advances ca
+        LEFT JOIN cash_advances ca
         ON ca.id = r.cash_advance_id
         INNER JOIN users u
         ON p.created_by = u.id
